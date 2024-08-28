@@ -1,0 +1,81 @@
+# from filters import upload_all_images
+
+# import io
+# import cloudinary.api
+# import cloudinary.uploader
+# import cloudinary
+
+
+# def otsu_threshold(img_gray):
+#     ret2, th2 = cv2.threshold(
+#         img_gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+#     # plt.imshow(th2)
+#     return th2
+
+
+# def adaptive_threshold(img_gray):
+#     th3 = cv2.adaptiveThreshold(
+#         img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+#     return th3
+
+
+# def image_gradients(img_gray):
+#     laplacian = cv2.Laplacian(img_gray, cv2.CV_64F)
+#     sobelx = cv2.Sobel(img_gray, cv2.CV_64F, 1, 0, ksize=5)
+#     sobely = cv2.Sobel(img_gray, cv2.CV_64F, 0, 1, ksize=5)
+#     return sobelx, sobely
+
+
+# def canny(img_gray):
+#     edges = cv2.Canny(img_gray, 20, 200)
+#     return edges
+
+
+# def clahe(img_gray):
+#     clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(5, 5))
+#     cl1 = clahe.apply(img_gray)
+#     return cl1
+
+
+# def return_all_images(img_path):
+#     img_gray = cv2.cvtColor(img_path, cv2.COLOR_BGR2GRAY)
+
+#     otsu_img = otsu_threshold(img_gray)
+#     adap_img = adaptive_threshold(img_gray)
+#     grad_img1, grad_img2 = image_gradients(img_gray)
+#     edge_img = canny(img_gray)
+#     clahe_img = clahe(img_gray)
+
+#     return [otsu_img, adap_img, grad_img1, grad_img1, edge_img, clahe_img]
+
+
+# def upload_numpy_array_as_image(numpy_array):
+#     # Convert the NumPy array to a PIL image
+#     pil_image = Image.fromarray(numpy_array)
+
+#     # Convert the PIL image to bytes
+#     image_bytes = io.BytesIO()
+#     pil_image.save(image_bytes, format='PNG')
+#     image_bytes.seek(0)
+
+#     # Configure Cloudinary with credentials from settings.py
+#     cloudinary.config(
+#         cloud_name="dctrj0w4q",
+#         api_key="767661174254334",
+#         api_secret="ytC7BiTjEa9jigTGb8DgOYzbDt8"
+#     )
+
+#     # Upload the image to Cloudinary
+#     response = cloudinary.uploader.upload(image_bytes, resource_type="image")
+
+#     # Return the public URL of the uploaded image
+#     return response["secure_url"]
+
+
+# def upload_all_images(img_path):
+#     img_list = return_all_images(img_path)
+#     url_list = []
+#     for numpy_arr in img_list:
+#         url_list.append(upload_numpy_array_as_image(numpy_arr))
+
+#     return url_list

@@ -1,0 +1,18 @@
+# .gitignore
+
+# Virtual environment
+venv/
+
+# Compiled Python files
+*.pyc
+
+# Database files
+*.db
+*.sqlite3
+*.log
+
+# Other generated files
+__pycache__/
+db.sqlite3
+media/
+static/ 
